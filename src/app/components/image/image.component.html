@@ -1,0 +1,4 @@
+<mat-card class="mat-elevation-z4">
+    <img mat-card-image  [src]="image.photo" [alt]="image._id" loading="eager">
+    <div mat-card-content class="ellipsis" [matTooltip]="image.text"> {{image.text}}</div>
+</mat-card>

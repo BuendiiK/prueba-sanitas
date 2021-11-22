@@ -1,0 +1,10 @@
+package.json
+package-lock.json
+dist
+karma.conf.js
+main.ts
+polyfills.ts
+test.ts
+environment.ts
+environment.prod.ts
+cypress/plugins/index.js

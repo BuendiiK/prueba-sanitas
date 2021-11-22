@@ -1,0 +1,39 @@
+.content {
+    padding: 1em;
+    height: calc(100% - 64px);
+    width: 100%;
+}
+
+.content>mat-card {
+    width: 200px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    max-height: 10rem;
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+}
+
+.search-input {
+    width: 50%;
+    margin-left: 10px;
+}
+
+.search-icon {
+    color: rgba(0, 0, 0, .54);
+}
+
+.search-icon:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
+.grid-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+    padding: 1em;
+}
