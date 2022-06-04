@@ -8,3 +8,4 @@ test.ts
 environment.ts
 environment.prod.ts
 cypress/plugins/index.js
+spec.js

@@ -1,39 +1,81 @@
 .content {
-    padding: 1em;
-    height: calc(100% - 64px);
-    width: 100%;
+  padding: 1em;
+  height: calc(100% - 64px);
+  width: 100%;
 }
 
-.content>mat-card {
-    width: 200px;
+.content > mat-card {
+  width: 200px;
 }
 
 .ellipsis {
-    overflow: hidden;
-    max-height: 10rem;
-    -webkit-box-orient: vertical;
-    display: block;
-    display: -webkit-box;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 4;
+  overflow: hidden;
+  max-height: 10rem;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
 }
 
 .search-input {
-    width: 50%;
-    margin-left: 10px;
+  width: 50%;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.search-input-wrapper {
+  background-color: #212121;
+  border-radius: 10px;
 }
 
 .search-icon {
-    color: rgba(0, 0, 0, .54);
+  color: white;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .search-icon:hover {
-    color: rgba(0, 0, 0, 1);
+  color: rgb(187, 0, 255);
 }
 
 .grid-content {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 100%;
-    padding: 1em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  padding: 1em;
+  margin-top: 30px;
+}
+
+.content-spinner {
+  height: 100%;
+}
+
+.progress-bar {
+  border-radius: 5px;
+  height: 10px;
+  margin-top: 20px;
+}
+.text-charging-images {
+  margin-top: 10px;
+}
+
+.header-text {
+  border-radius: 10px;
+  justify-content: center;
+  font-size: xxx-large;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: white;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: white;
+}
+
+::ng-deep .mat-input-element {
+  caret-color: white;
+  color: white !important;
 }

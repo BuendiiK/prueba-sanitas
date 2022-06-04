@@ -1,18 +1,67 @@
 <div class="content" fxLayout="column">
-    <div class="search-input-wrapper mx-12 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
-        <label for="search" class="mr-8">
-<mat-icon matTooltip="Hacer búsqueda" class="search-icon">search</mat-icon>
-</label>
-        <mat-form-field floatPlaceholder="never" ngDefaultControl [(ngModel)]="inputSearch" fxFlex="1 0 auto" class="search-input">
-            <input id="search-input" matInput #filter placeholder="Búsqueda" (keyup)="applyFilter($event)">
-        </mat-form-field>
-    </div>
-    <div class="grid-content" infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false" (scrolled)="onScroll()">
-        <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let element of imageArray; trackBy: trackById">
-                <app-image [image]="element"></app-image>               
-            </div>
-        </div>
-    </div>
+  <!-- Título -->
+  <p>
+    <mat-toolbar class="header-text">
+      <span>Prueba Sanitas</span>
+    </mat-toolbar>
+  </p>
 
+  <!-- Barra de búsqueda -->
+  <div class="search-input-wrapper" fxLayout="row" fxLayoutAlign="start center">
+    <label for="search" class="mr-8">
+      <mat-icon matTooltip="Realizar búsqueda" class="search-icon"
+        >search</mat-icon
+      >
+    </label>
+    <mat-form-field
+      ngDefaultControl
+      [(ngModel)]="inputSearch"
+      fxFlex="1 0 auto"
+      class="search-input"
+    >
+      <input
+        id="search-input"
+        matInput
+        #filter
+        placeholder="Búsqueda"
+        (keyup)="applyFilter($event)"
+      />
+    </mat-form-field>
+    <mat-divider></mat-divider>
+  </div>
+
+  <!-- Grid de imágenes -->
+  <div
+    *ngIf="imageArray.length !== 0"
+    class="grid-content"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [scrollWindow]="false"
+  >
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div
+        fxFlex="25%"
+        fxFlex.xs="100%"
+        fxFlex.sm="33%"
+        *ngFor="let element of imageArray; trackBy: trackById"
+      >
+        <app-image *ngIf="element.photo" [image]="element"></app-image>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="imageArray.length === 0 && !imageService.noDataReturned()">
+    <div class="content-spinner">
+      <mat-progress-bar
+        mode="indeterminate"
+        class="progress-bar"
+      ></mat-progress-bar>
+      <h1 class="text-charging-images">Cargando imágenes. Espere...</h1>
+    </div>
+  </div>
+  <div *ngIf="imageService.noDataReturned()">
+    <div class="content-spinner">
+      <h1 class="text-charging-images">No existen datos.</h1>
+    </div>
+  </div>
 </div>

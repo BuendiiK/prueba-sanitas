@@ -16,45 +16,62 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ImageService } from './services/image.service';
 import { LoremIpsum } from 'lorem-ipsum';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [AppComponent, ImageComponent, GridComponent],
   imports: [
+    // Angular
     BrowserModule,
     CommonModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    //Material
     MatCardModule,
     MatIconModule,
-    ScrollingModule,
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
-    HttpClientModule,
+    MatDividerModule,
+    MatToolbarModule,
+    ScrollingModule,
     MatGridListModule,
+    MatProgressBarModule,
+    //HTML Layout
     FlexLayoutModule,
-    FormsModule,
+    //Infinite scroll
     InfiniteScrollModule,
-    BrowserAnimationsModule,
+    // Lazy loading for images
+    LazyLoadImageModule
   ],
   exports: [GridComponent],
   providers: [
+    // Lorem Ipsum generator
     LoremIpsum,
+    // Image service
     ImageService,
+    // Provider encargado de llamar al servicio de imagenes cuando se carga el módulo.
     {
       provide: APP_INITIALIZER,
       useFactory: initFunction,
       deps: [ImageService],
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 
+// Función que se ejecuta cuendo se carga el módulo. Llama a la función del servicio para que cargue JSON de imágenes
 export function initFunction(config: ImageService) {
   return () => config.init();
 }

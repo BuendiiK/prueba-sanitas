@@ -9,7 +9,9 @@
     "sourceType": "module"
   },
   "rules": {
-        // Aquí se pueden especificar reglas propias para ESLint, así como para sobrescribir las reglas que ya existen.
-        "@typescript-eslint/no-empty-function": "off"
+    // Aquí se pueden especificar reglas propias para ESLint, así como para sobrescribir las reglas que ya existen.
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-var-requires": 0
   }
 }

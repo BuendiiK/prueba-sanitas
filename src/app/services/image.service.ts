@@ -1,73 +1,92 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { LoremIpsum } from 'lorem-ipsum';
-import { Image } from '../models/image';
+import { Image_ } from '../models/image';
 
 @Injectable()
 export class ImageService {
-  private imageArray: Observable<any>;
+  private imageArray: Observable<Image_[]>;
+  private images: Image_[] = [];
+  noData = false;
   constructor(private http: HttpClient) {}
 
   // Función que carga el array de imágenes cuando se inicia la app
   init() {
     this.imageArray = new Observable((observer) => {
-      this.getJSON(4000).subscribe((response: Image[]) => {
-        observer.next(response);
-      });
+      this.getJSON(4000)
+        .pipe(take(1))
+        .subscribe((response: Image_[]) => {
+          observer.next(response);
+        });
     });
   }
 
-  // Contifuración del lorem ipsum
-  private text = new LoremIpsum({
+  // Configuración del lorem ipsum
+  private textIpsumConfig = new LoremIpsum({
     sentencesPerParagraph: {
       max: 8,
-      min: 4,
+      min: 4
     },
     wordsPerSentence: {
       max: 16,
-      min: 4,
-    },
+      min: 4
+    }
   });
 
-  // Servicio que devuelve un JSON de tipo Image[]
-  private getJSON(limit: number): Observable<any> {
-    return this.http.get(
+  // Servicio que devuelve el resultado del JSON de tipo Image_[] generado siendo este
+  // nuevo si no existe uno anterior. Si existe, devuelve el previamente generado.
+  private getJSON(limit: number): Observable<Image_[]> {
+    return this.http.get<Image_[]>(
       'data:application/json;charset=UTF-8,' +
-        encodeURIComponent(JSON.stringify(this.generateJson(limit)))
+        encodeURIComponent(
+          JSON.stringify(
+            this.images.length === 0 ? this.generateJson(limit) : this.images
+          )
+        )
     );
   }
 
-  // Función de generación de un Json Aleatorio de tipo Image[]
-  private generateJson(limit: number): Image[] {
-    const images: Image[] = [];
+  // Función que genera un JSON de tipo Image_[] de manera aleatoria
+  private generateJson(limit: number): Image_[] {
     for (let index = 0; index < limit; index++) {
-      const id: number = Math.trunc(Math.random() * (1084 - 1) + 1);
-      const image: Image = new Image(
+      // const id = Math.trunc(Math.random() * (1084 - 1) + 1);
+      const id = index + 1;
+      const text = this.textIpsumConfig.generateWords(5);
+      const image: Image_ = new Image_(
         id,
         `https://picsum.photos/id/${id}/500/500.jpg`,
-        this.text.generateWords(5)
+        text.charAt(0).toUpperCase() + text.slice(1)
       );
-      images.push(image);
+      this.images.push(image);
     }
-    return images;
+    return this.images;
   }
 
-  public addImages(start: number, end: number, filter = ''): Observable<any> {
+  // Función que devuelve un array de objetos Image_ extraida del JSON generado y que filtra por id y texto
+  public addImages(filter: string): Observable<Image_[]> {
     return this.imageArray.pipe(
       map((res) => {
         if (filter === '') {
-          return res.splice(start, end);
+          this.noData = false;
+          return res;
         } else {
-          return res
-            .filter(
-              (x: Image) =>
-                x.text.toLocaleLowerCase().includes(filter) ||
-                x._id.toString().includes(filter)
-            )
-            .splice(start, end);
+          const resFiltered = res.filter(
+            (x: Image_) =>
+              x.text.toLocaleLowerCase().includes(filter) ||
+              x._id.toString().includes(filter)
+          );
+          resFiltered.length === 0
+            ? (this.noData = true)
+            : (this.noData = false);
+          return resFiltered;
         }
       })
     );
+  }
+
+  // Funcion que devuelve si esxisten o no datos tras realizar una búsqueda
+  noDataReturned() {
+    return this.noData;
   }
 }
