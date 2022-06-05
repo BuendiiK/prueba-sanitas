@@ -74,7 +74,7 @@ export class ImageService {
           const resFiltered = res.filter(
             (x: Image_) =>
               x.text.toLocaleLowerCase().includes(filter) ||
-              x._id.toString().includes(filter)
+              x.id.toString().includes(filter)
           );
           resFiltered.length === 0
             ? (this.noData = true)

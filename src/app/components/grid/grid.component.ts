@@ -12,7 +12,6 @@ export class GridComponent implements OnInit {
   constructor(public imageService: ImageService) {}
 
   public data: Image_[] = [];
-  public dataCopy: Image_[] = [];
   public imageArray: Image_[] = [];
   public allImageArray: Image_[] = [];
   public inputSearch = '';
@@ -44,6 +43,6 @@ export class GridComponent implements OnInit {
 
   // Funcion trackBy para optimizar la carga del ngFor
   public trackById(index: number, item: Image_) {
-    return item._id;
+    return item.id;
   }
 }

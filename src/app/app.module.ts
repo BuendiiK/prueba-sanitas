@@ -1,4 +1,8 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -46,6 +50,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     ScrollingModule,
     MatGridListModule,
     MatProgressBarModule,
+    MatDividerModule,
     //HTML Layout
     FlexLayoutModule,
     //Infinite scroll
@@ -67,7 +72,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
 
