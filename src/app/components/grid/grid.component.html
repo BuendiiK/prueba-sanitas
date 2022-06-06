@@ -7,9 +7,9 @@
   </p>
 
   <!-- Barra de búsqueda -->
-  <div class="search-input-wrapper" fxLayout="row" fxLayoutAlign="start center">
-    <label for="search" class="mr-8">
-      <mat-icon matTooltip="Realizar búsqueda" class="search-icon"
+  <div class="search" fxLayout="row" fxLayoutAlign="start center">
+    <label for="search__icon" class="mr-8">
+      <mat-icon matTooltip="Realizar búsqueda" class="search__icon search__icon--hover"
         >search</mat-icon
       >
     </label>
@@ -17,7 +17,7 @@
       ngDefaultControl
       [(ngModel)]="inputSearch"
       fxFlex="1 0 auto"
-      class="search-input"
+      class="search__input"
     >
       <input
         id="search-input"
@@ -32,36 +32,41 @@
 
   <!-- Grid de imágenes -->
   <div
+    id="imageArray"
     *ngIf="imageArray.length !== 0"
-    class="grid-content"
+    class="grid"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [scrollWindow]="false"
   >
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div id="imageArrayGrid"  fxLayout="row wrap" fxLayoutGap="16px grid">
       <div
         fxFlex="25%"
         fxFlex.xs="100%"
         fxFlex.sm="33%"
         *ngFor="let element of imageArray; trackBy: trackById"
       >
-        <app-image *ngIf="element.photo" [image]="element"></app-image>
+        <app-image
+          id="imagenId"
+          *ngIf="element.photo"
+          [image]="element"
+        ></app-image>
       </div>
     </div>
   </div>
 
   <div *ngIf="imageArray.length === 0 && !imageService.noDataReturned()">
-    <div class="content-spinner">
+    <div class="loading">
       <mat-progress-bar
         mode="indeterminate"
-        class="progress-bar"
+        class="loading__progress-bar"
       ></mat-progress-bar>
-      <h1 class="text-charging-images">Cargando imágenes. Espere...</h1>
+      <h1 class="loading__text">Cargando imágenes. Espere...</h1>
     </div>
   </div>
   <div *ngIf="imageService.noDataReturned()">
-    <div class="content-spinner">
-      <h1 class="text-charging-images">No existen datos.</h1>
+    <div id="noData" class="no-data">
+      <h1 class="no-data__text">No existen datos.</h1>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@
     [alt]="imageError(image.id)"
     [lazyLoad]="image.photo"
   />
-  <div mat-card-content class="ellipsis" [matTooltip]="image.text">
+  <div mat-card-content [matTooltip]="image.text">
     {{ image.text }}
   </div>
 </mat-card>

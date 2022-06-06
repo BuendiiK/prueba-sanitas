@@ -52,7 +52,7 @@ export class ImageService {
     for (let index = 0; index < limit; index++) {
       // const id = Math.trunc(Math.random() * (1084 - 1) + 1);
       const id = index + 1;
-      const text = this.textIpsumConfig.generateWords(5);
+      const text = this.textIpsumConfig.generateWords(4);
       const image: Image_ = new Image_(
         id,
         `https://picsum.photos/id/${id}/500/500.jpg`,
@@ -86,7 +86,7 @@ export class ImageService {
   }
 
   // Funcion que devuelve si esxisten o no datos tras realizar una búsqueda
-  noDataReturned() {
+  noDataReturned(): boolean {
     return this.noData;
   }
 }

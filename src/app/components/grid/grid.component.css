@@ -4,43 +4,35 @@
   width: 100%;
 }
 
-.content > mat-card {
-  width: 200px;
+.header-text {
+  border-radius: 10px;
+  justify-content: center;
+  font-size: xxx-large;
 }
 
-.ellipsis {
-  overflow: hidden;
-  max-height: 10rem;
-  -webkit-box-orient: vertical;
-  display: block;
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 4;
+.search {
+  background-color: #212121;
+  border-radius: 10px;
 }
 
-.search-input {
+.search__icon {
+  color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.search__icon--hover:hover {
+  color: rgb(187, 0, 255);
+}
+
+.search__input {
   width: 50%;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
 }
 
-.search-input-wrapper {
-  background-color: #212121;
-  border-radius: 10px;
-}
-
-.search-icon {
-  color: white;
-  margin-left: 10px;
-  margin-top: 10px;
-}
-
-.search-icon:hover {
-  color: rgb(187, 0, 255);
-}
-
-.grid-content {
+.grid {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
@@ -48,23 +40,26 @@
   margin-top: 30px;
 }
 
-.content-spinner {
+.loading {
   height: 100%;
 }
 
-.progress-bar {
+.loading__progress-bar {
   border-radius: 5px;
   height: 10px;
   margin-top: 20px;
 }
-.text-charging-images {
+
+.loading__text {
   margin-top: 10px;
 }
 
-.header-text {
-  border-radius: 10px;
-  justify-content: center;
-  font-size: xxx-large;
+.no-data {
+  height: 100%;
+}
+
+.no-data__text {
+  margin-top: 10px;
 }
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {

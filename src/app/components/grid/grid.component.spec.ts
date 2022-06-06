@@ -1,11 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  waitForAsync
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from 'src/app/app.module';
 import { ImageService } from 'src/app/services/image.service';
 
